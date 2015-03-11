@@ -249,6 +249,9 @@ on post-fs-data
     chmod 664 /sys/devices/system/cpu/cpu3/online
     write /dev/cpuctl/apps/cpu.notify_on_migrate 0
 
+    write /sys/class/misc/mako_hotplug_control/load_threshold 65
+    write /sys/class/misc/mako_hotplug_control/high_load_counter 5
+
     # Allows franco.Kernel updater to know this feature is supported
     setprop fku.profiles 1
 
