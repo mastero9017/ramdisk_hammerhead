@@ -186,14 +186,19 @@ on post-fs-data
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "conservative"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "conservative"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "conservative"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "blu_active"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "blu_active"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "blu_active"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "blu_active"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2265600
+    write /sys/class/kgsl/kgsl-3d0/max_gpuclk 487500000
     chown root.system /sys/devices/system/cpu/mfreq
     chmod 220 /sys/devices/system/cpu/mfreq
     chown root.system /sys/devices/system/cpu/cpu1/online
@@ -203,16 +208,20 @@ on post-fs-data
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
     write /dev/cpuctl/apps/cpu.notify_on_migrate 0
-    write /sys/class/misc/mako_hotplug_control/load_threshold 65
-    write /sys/class/misc/mako_hotplug_control/high_load_counter 5
-    write /sys/devices/system/cpu/cpufreq/conservative/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/conservative/freq_step 10
-    write /sys/devices/system/cpu/cpufreq/conservative/down_threshold 40
-    write /sys/devices/system/cpu/cpufreq/conservative/input_boost_freq 2265600    
+    write /sys/devices/system/cpu/cpufreq/blu_active/input_boost_freq 1190400
+    write /sys/devices/system/cpu/cpufreq/blu_active/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/blu_active/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/blu_active/timer_slack 30000
+    write /sys/devices/system/cpu/cpufreq/blu_active/hispeed_freq 1497600
+    write /sys/devices/system/cpu/cpufreq/blu_active/timer_rate 40000
+    write /sys/devices/system/cpu/cpufreq/blu_active/above_hispeed_delay "20000 1400000:40000 1700000:20000"
+    write /sys/devices/system/cpu/cpufreq/blu_active/max_freq_hysteresis 100000
+    write /sys/devices/system/cpu/cpufreq/blu_active/boostpulse_duration 80000
+    write /sys/devices/system/cpu/cpufreq/blu_active/go_hispeed_load 90   
     write /sys/kernel/mm/ksm/sleep_millisecs 1500
     write /sys/kernel/mm/ksm/pages_to_scan 256
     write /sys/kernel/mm/ksm/deferred_timer 1
-    write /sys/kernel/mm/ksm/run 1
+    write /sys/kernel/mm/ksm/run 0
 
     # Allows franco.Kernel updater to know this feature is supported
     setprop fku.profiles 1
