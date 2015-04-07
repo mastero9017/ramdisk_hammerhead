@@ -10,7 +10,6 @@ import /init.${ro.hardware}.rc
 import /init.${ro.zygote}.rc
 import /init.trace.rc
 import /init.cm.rc
-import /init.crystal.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -566,6 +565,9 @@ service bootanim /system/bin/bootanimation
     user graphics
     group graphics audio
     disabled
+    oneshot
+
+service sysinit /system/bin/sysinit
     oneshot
 
 service installd /system/bin/installd
